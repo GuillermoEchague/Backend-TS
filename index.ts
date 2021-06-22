@@ -20,13 +20,24 @@ server.app.use('/user', userRoutes );
 server.app.use('/posts', postRoutes );
 
 // Conectar DB
-mongoose.connect('mongodb://localhost:27017/fotosgram', 
-                { useNewUrlParser: true, useCreateIndex: true }, ( err ) => {
+// db
+const db = async () => {
+    try {
+        const success = await mongoose.connect(process.env.DATABASE_CLOUD, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false 
+        });
+        console.log('DB Connected');
+    } catch (error) {
+        console.log('DB Connection Error', error);
+    }
+};
 
-   if ( err ) throw err;
+// executes database connection
+db();
 
-   console.log('Base de datos ONLINE');
-})
 
 // Levantar express
 server.start( () => {

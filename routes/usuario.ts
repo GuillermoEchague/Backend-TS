@@ -12,7 +12,7 @@ userRoutes.post('/login', (req: Request, res: Response ) => {
 
     const body = req.body;
 
-    Usuario.findOne ({ email: body.email }, ( err, userDB )  => {
+    Usuario.findOne({ email: body.email }, ( err: any, userDB: any )  => {
 
         if ( err ) throw err;
 
@@ -127,5 +127,13 @@ userRoutes.post('/update', verificaToken, (req: any, res: Response ) => {
 
 });
 
+userRoutes.get('/', [verificaToken], (req: any, res:Response)=>{
+    const usuario = req.usuario;
+
+    res.json({
+        ok:true,
+        usuario
+    })
+});
 
 export default userRoutes;

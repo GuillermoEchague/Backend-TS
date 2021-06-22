@@ -21,7 +21,4 @@ export const verificaToken = ( req: any, res: Response, next: NextFunction  ) =>
 
         });
 
-
-
-
 }
